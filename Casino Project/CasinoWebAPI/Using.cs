@@ -1,0 +1,13 @@
+﻿global using System.ComponentModel.DataAnnotations;
+global using System.ComponentModel.DataAnnotations.Schema;
+global using CasinoWebAPI.DTOs;
+global using Microsoft.EntityFrameworkCore;
+global using CasinoWebAPI.Database;
+global using CasinoWebAPI.Database.Entities;
+global using RouteAttribute = Microsoft.AspNetCore.Mvc.RouteAttribute;
+global using Microsoft.AspNetCore.Mvc;
+global using CasinoWebAPI.Services;
+global using CasinoWebAPI.Repositories;
+global using CasinoWebAPI.Controllers;
+//global using CasinoWebAPI.Helpers;
+//global using CasinoWebAPI.Authorization;
