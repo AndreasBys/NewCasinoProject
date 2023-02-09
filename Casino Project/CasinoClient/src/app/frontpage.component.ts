@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Game } from './_models/Game';
 import { CasinoService } from './_services/casino.service';
 import { SplitInterpolation } from '@angular/compiler';
+import { concat, count } from 'rxjs';
 
 @Component({
   selector: 'app-frontpage',
@@ -38,32 +39,72 @@ import { SplitInterpolation } from '@angular/compiler';
 })
 export class FrontpageComponent implements OnInit {
   Games: Game[] = [];
+  board: Array<number>[] = [];
 
   constructor(private gameService: CasinoService) { }
 
   ngOnInit(): void {
-    this.gameService.getAll().subscribe(x => this.Games = x);
+    //this.gameService.getAll().subscribe(x => this.Games = x);
     this.Spin();
   }
   
   Spin():void{
+    this.board = [];
 
-    var arr: number[][] = new Array();
+    this.board.push([Math.floor(Math.random() * 6),Math.floor(Math.random() * 6),Math.floor(Math.random() * 6)]);
+    this.board.push([Math.floor(Math.random() * 6),Math.floor(Math.random() * 6),Math.floor(Math.random() * 6)]);
+    this.board.push([Math.floor(Math.random() * 6),Math.floor(Math.random() * 6),Math.floor(Math.random() * 6)]); // Assign type baseret på hvilket nummer det er?? Typen kan være et billede
 
-    arr.push([Math.floor(Math.random() * 6),Math.floor(Math.random() * 6),Math.floor(Math.random() * 6)]);
-    arr.push([Math.floor(Math.random() * 6),Math.floor(Math.random() * 6),Math.floor(Math.random() * 6)]);
-    arr.push([Math.floor(Math.random() * 6),Math.floor(Math.random() * 6),Math.floor(Math.random() * 6)]);
+    
+    //console.log(document.getElementById("celle1")?.appendChild(test));
 
-    document.getElementById("celle" + "1")!.innerHTML = arr[0][0].toString();
-    document.getElementById("celle" + "2")!.innerHTML = arr[0][1].toString();
-    document.getElementById("celle" + "3")!.innerHTML = arr[0][2].toString();
+    var counter: number;
+    counter = 0;
+    
+    var imageID = document.getElementById("celle1");
 
-    document.getElementById("celle" + "4")!.innerHTML = arr[1][0].toString();
-    document.getElementById("celle" + "5")!.innerHTML = arr[1][1].toString();
-    document.getElementById("celle" + "6")!.innerHTML = arr[1][2].toString();
+    imageID?.parentNode?.removeChild(imageID);
 
-    document.getElementById("celle" + "7")!.innerHTML = arr[2][0].toString();
-    document.getElementById("celle" + "8")!.innerHTML = arr[2][1].toString();
-    document.getElementById("celle" + "9")!.innerHTML = arr[2][2].toString();
+    for( var test123213: number = 0;test123213 < 9; test123213++){
+      //document.getElementById("celle" + test123213)!.removeChild(imageID);
+    }
+
+    
+
+    // Create et element baseret på hvilket tal der ligger i vores board. Først når tallet er gået igennem en if statement laver vi elementet
+    this.board.forEach(element => {
+
+
+      element.forEach(x => {
+        var test = document.createElement("img");
+        test.id = "imgid"
+        if(x === 1){
+        
+        test.src = "http://www.google.com/intl/en_com/images/logo_plain.png";
+        }
+        
+        counter++;
+        var testern = document.getElementById("celle" + counter)?.appendChild(test);
+        console.log(testern);
+        //testern?.append(test);
+        console.log(x);
+      });
+    });
+
+
+
+    //document.getElementById("celle" + "1")!.innerHTML = this.board[0][0].toString();
+    //document.getElementById("celle" + "2")!.innerHTML = this.board[0][1].toString();
+    //document.getElementById("celle" + "3")!.innerHTML = this.board[0][2].toString();
+
+    //document.getElementById("celle" + "4")!.innerHTML = this.board[1][0].toString();
+    //document.getElementById("celle" + "5")!.innerHTML = this.board[1][1].toString();
+    //document.getElementById("celle" + "6")!.innerHTML = this.board[1][2].toString();
+
+    //document.getElementById("celle" + "7")!.innerHTML = this.board[2][0].toString();
+    //document.getElementById("celle" + "8")!.innerHTML = this.board[2][1].toString();
+    //document.getElementById("celle" + "9")!.innerHTML = this.board[2][2].toString();
+
+    
   }
 }
