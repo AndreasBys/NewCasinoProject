@@ -6,6 +6,7 @@ namespace CasinoWebAPI.Repositories
     public interface ILoginRepository
     {
         Task<List<Login>> GetAllLoginAsync();
+        
 
     }
 
@@ -23,5 +24,9 @@ namespace CasinoWebAPI.Repositories
         {
             return await _context.Login.ToListAsync();
         }
+
+
+
+
     }
 }
