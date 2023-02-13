@@ -3,7 +3,7 @@
     public interface ILoginService
     {
         Task<List<LoginResponse>> GetAllLoginAsync();
-
+        Task<LoginResponse> GetLoginByID(int ID);
 
 
     }
@@ -46,5 +46,19 @@
 
             return null;
         }
+
+        public async Task<LoginResponse> GetLoginByID(int loginid)
+        {
+            // Går ned i repositoriet efter et login id vi får fra controlleren / Når vi kalder metoden
+            var login = await _loginRepository.GetLoginByID(loginid);
+            if (login != null)
+            {
+                // Når vi har fået vores login object, returnerer vi det some et loginresponse
+                return LoginToLoginReponse(login);
+            }
+            return null;
+        }
+
+
     }
 }

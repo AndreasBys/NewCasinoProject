@@ -41,11 +41,6 @@ namespace CasinoWebAPI.Services
             };
         }
 
-
-
-
-
-
         public async Task<List<GameResponse>> GetAllGamesAsync()
         {
             var game = await _gameRepository.GetAllGamesAsync();
@@ -57,7 +52,6 @@ namespace CasinoWebAPI.Services
             }
 
             return null;
-
         }
 
         public async Task<GameResponse> GameWin(GameRequest games)
@@ -72,5 +66,9 @@ namespace CasinoWebAPI.Services
 
             return GameToGameResponse(game);
         }
+
+
+
+
     }
 }

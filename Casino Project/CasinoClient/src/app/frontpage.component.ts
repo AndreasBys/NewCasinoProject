@@ -12,11 +12,9 @@ import { LoginService } from './_services/login.service';
   standalone: true,
   imports: [CommonModule],
   template: `
-    <p>
-      frontpage works!
-    </p>
-
-    <div class="SlotMaskine">
+  <div class="topwrapper">
+    <div class="innerwrapper">
+      <div class="SlotMaskine">
       <td id="celle1"></td>
       <td id="celle2"></td>
       <td id="celle3"></td>
@@ -28,20 +26,58 @@ import { LoginService } from './_services/login.service';
       <td id="celle7"></td>
       <td id="celle8"></td>
       <td id="celle9"></td>
+      </div>
+        <div class="slotbar">
+          <div>Balance: {{Login.balance}} DKK | Indsats: {{Indsats}} DKK</div>
+          <button type="button"(click)="Spin()">Spin</button>
+      </div>
     </div>
-    <div>{{Login.balance}}</div>
-    <button type="button"(click)="Spin()">Spin</button>
+  </div>
   `,
   styles: [`
   td{
     border:solid;
+    width:100%;
+    height:100%;
+    max-height:200px;
+    max-width:200px;
+    min-width:200px;
+    min-height:200px;
   }
+
+  .slotbar{
+    border:solid 2px;
+    background: black;
+    opacity: 0.6;
+    color:white;
+  }
+
+  #imgid{
+    min-height:100%;
+  }
+
   .SlotMaskine{
     display: grid;
     grid-template-columns: auto auto auto;
-    min-height: 300px;
-    max-height:300px;
+    margin-left: 10%;
+    margin-right:10%;
+    justify-content: center;
   }
+  .innerwrapper{
+    display:inline-block;
+    border:solid;
+    width:100%;
+    margin-left: 10%;
+    margin-right:10%;
+    background: url(https://webmg.ru/wp-content/uploads/2022/11/i-99-3.jpeg);
+    background-size:cover;
+  }
+  .topwrapper{
+    position: fixed;
+    width:100%;
+    display:flex;
+  }
+  body,html{height:100%; width:100%; overflow-x: hidden;}
   `
   ]
 })
@@ -49,17 +85,20 @@ export class FrontpageComponent implements OnInit {
   Games: Game[] = [];
   Login: Login = {loginID: 0, email: '', balance: 0, Password: ''};
   board: Array<number>[] = [];
+  Indsats: number = 10;
+
 
   constructor(private gameService: CasinoService, private loginService: LoginService) { }
 
   ngOnInit(): void {
     this.gameService.getAll().subscribe(x => this.Games = x);
     //this.loginService.getAll().subscribe(x => this.Login = x);
+    this.loginService.getByID(1).subscribe(x => this.Login = x);
     this.Spin();
-    console.log(this.Login);
   }
   
   Spin():void{
+    this.Login.balance -= this.Indsats;
     this.board = [];
 
     this.board.push([Math.floor(Math.random() * 6),Math.floor(Math.random() * 6),Math.floor(Math.random() * 6)]);
@@ -99,7 +138,10 @@ export class FrontpageComponent implements OnInit {
 
         var test = document.createElement("img");
         test.id = "imgid"
-        test.height = 100;
+        test.style.height = '100%';
+        test.style.width = '100%';
+        test.height = 170;
+        test.width = 230;
         
         switch(x){
           case 0: 
@@ -134,19 +176,15 @@ export class FrontpageComponent implements OnInit {
     });
 
 
-
-    //document.getElementById("celle" + "1")!.innerHTML = this.board[0][0].toString();
-    //document.getElementById("celle" + "2")!.innerHTML = this.board[0][1].toString();
-    //document.getElementById("celle" + "3")!.innerHTML = this.board[0][2].toString();
-
-    //document.getElementById("celle" + "4")!.innerHTML = this.board[1][0].toString();
-    //document.getElementById("celle" + "5")!.innerHTML = this.board[1][1].toString();
-    //document.getElementById("celle" + "6")!.innerHTML = this.board[1][2].toString();
-
-    //document.getElementById("celle" + "7")!.innerHTML = this.board[2][0].toString();
-    //document.getElementById("celle" + "8")!.innerHTML = this.board[2][1].toString();
-    //document.getElementById("celle" + "9")!.innerHTML = this.board[2][2].toString();
-
     
   }
+
+  WinUdregning(): void{
+
+
+
+  }
+
+
+
 }

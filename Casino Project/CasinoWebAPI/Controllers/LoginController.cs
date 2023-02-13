@@ -1,4 +1,6 @@
-﻿namespace CasinoWebAPI.Controllers
+﻿using Microsoft.AspNetCore.Components;
+
+namespace CasinoWebAPI.Controllers
 {
     [Route("api/[Controller]")]
     [ApiController]
@@ -32,10 +34,27 @@
             {
                 return Problem(ex.Message);
             }
+        }
 
+        [HttpGet]
+        [Route("{ID}")]
+        public async Task<IActionResult> GetLoginByID([FromRoute] int ID)
+        {
+            try
+            {
+                var login = await _loginService.GetLoginByID(ID);
 
+                if (login == null)
+                {
+                    return NotFound();
 
-
+                }
+                return Ok(login);
+            }
+            catch (Exception ex)
+            {
+                return Problem(ex.Message);
+            }
         }
     }
 }
