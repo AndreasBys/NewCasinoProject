@@ -31,7 +31,7 @@ import { LoginService } from './_services/login.service';
           <div class="displayinfo">
             <div>Balance: {{Login.balance}} DKK  Indsats: {{Indsats}} DKK</div>
           </div>
-          <div class="win">Test</div>
+          <div class="win" id="WinAnnouncement">Test</div>
           <div class="SpinButton">
             <a class="SpinButtonUnderWrapper"  (click)="Spin()" href="#">
             <span>Spin</span>
@@ -60,7 +60,7 @@ import { LoginService } from './_services/login.service';
   .win{
     margin:auto;
     text-align: center;
-    width:150px;
+    width:200px;
     font-size:40px;
   }
   /* Spin button */
@@ -157,6 +157,7 @@ import { LoginService } from './_services/login.service';
     color:white;
     display:flex;
     justify-content:center;
+    height:150px;
   }
 
   #imgid{
@@ -178,11 +179,16 @@ import { LoginService } from './_services/login.service';
     margin-right:10%;
     background: url(https://webmg.ru/wp-content/uploads/2022/11/i-99-3.jpeg);
     background-size:cover;
+    min-height:600px;
+    height:10%;
   }
   .topwrapper{
     position: fixed;
     width:100%;
     display:flex;
+    background: url(https://images.hdqwalls.com/wallpapers/playstation-background-image-yu.jpg);
+    background-size:cover;
+    height:100%;
   }
   body,html{height:100%; width:100%; overflow-x: hidden;}
   `
@@ -236,16 +242,24 @@ export class FrontpageComponent implements OnInit {
 
       if(element[0] === element[1] && element[1] === element[2]){
         switch(element[0]){
-          case 0: this.Login.balance += this.Indsats * 200;
+          case 0: 
+          this.Login.balance += this.Indsats * 200;
+          document.getElementById("WinAnnouncement")!.innerHTML = "WIN DKK " + this.Indsats * 20;
             break;
 
-          case 1: this.Login.balance += this.Indsats * 20;
+          case 1: 
+          this.Login.balance += this.Indsats * 200;
+          document.getElementById("WinAnnouncement")!.innerHTML = "WIN DKK " + this.Indsats * 20;
             break;
 
-          case 2: this.Login.balance += this.Indsats * 20;
+          case 2: 
+          this.Login.balance += this.Indsats * 200;
+          document.getElementById("WinAnnouncement")!.innerHTML = "WIN DKK " + this.Indsats * 20;
             break;
 
-          case 3: this.Login.balance += this.Indsats * 20;
+          case 3: 
+          this.Login.balance += this.Indsats * 200;
+          document.getElementById("WinAnnouncement")!.innerHTML = "WIN DKK " + this.Indsats * 20;
             break;
 
           case 4: this.Login.balance += this.Indsats * 20;
