@@ -189,6 +189,7 @@ import { LoginService } from './_services/login.service';
     background: url(https://images.hdqwalls.com/wallpapers/playstation-background-image-yu.jpg);
     background-size:cover;
     height:100%;
+    padding-top:50px;
   }
   body,html{height:100%; width:100%; overflow-x: hidden;}
   `
@@ -218,7 +219,7 @@ export class FrontpageComponent implements OnInit {
     }
     this.Login.balance -= this.Indsats;
     this.board = [];
-
+    document.getElementById("WinAnnouncement")!.innerHTML = " ";
     this.board.push([Math.floor(Math.random() * 6),Math.floor(Math.random() * 6),Math.floor(Math.random() * 6)]);
     this.board.push([Math.floor(Math.random() * 6),Math.floor(Math.random() * 6),Math.floor(Math.random() * 6)]);
     this.board.push([Math.floor(Math.random() * 6),Math.floor(Math.random() * 6),Math.floor(Math.random() * 6)]); // Assign type baseret på hvilket nummer det er?? Typen kan være et billede
@@ -243,22 +244,22 @@ export class FrontpageComponent implements OnInit {
       if(element[0] === element[1] && element[1] === element[2]){
         switch(element[0]){
           case 0: 
-          this.Login.balance += this.Indsats * 200;
-          document.getElementById("WinAnnouncement")!.innerHTML = "WIN DKK " + this.Indsats * 20;
+          this.Login.balance += this.Indsats * 2;
+          document.getElementById("WinAnnouncement")!.innerHTML = "WIN DKK " + this.Indsats * 2 + "  & FREE SPINS";
             break;
 
           case 1: 
-          this.Login.balance += this.Indsats * 200;
+          this.Login.balance += this.Indsats * 20;
           document.getElementById("WinAnnouncement")!.innerHTML = "WIN DKK " + this.Indsats * 20;
             break;
 
           case 2: 
-          this.Login.balance += this.Indsats * 200;
+          this.Login.balance += this.Indsats * 20;
           document.getElementById("WinAnnouncement")!.innerHTML = "WIN DKK " + this.Indsats * 20;
             break;
 
           case 3: 
-          this.Login.balance += this.Indsats * 200;
+          this.Login.balance += this.Indsats * 20;
           document.getElementById("WinAnnouncement")!.innerHTML = "WIN DKK " + this.Indsats * 20;
             break;
 
