@@ -61,7 +61,7 @@ import { LoginService } from './_services/login.service';
     margin:auto;
     text-align: center;
     width:200px;
-    font-size:40px;
+    font-size:25px;
   }
   /* Spin button */
   .SpinButton{
@@ -73,7 +73,7 @@ import { LoginService } from './_services/login.service';
   }
   .SpinButtonUnderWrapper{
     display:flex;
-    padding: 10px 45px;
+    padding: 10px 35px;
     text-decoration: none;
     font-family: sans-serif;
     font-size: 40px;
@@ -229,6 +229,9 @@ export class FrontpageComponent implements OnInit {
 
     var counter: number;
     counter = 0;
+    
+    var winamount: number = 0;
+
 
     //imageID?.parentNode?.removeChild(imageID);
 
@@ -245,30 +248,37 @@ export class FrontpageComponent implements OnInit {
         switch(element[0]){
           case 0: 
           this.Login.balance += this.Indsats * 2;
-          document.getElementById("WinAnnouncement")!.innerHTML = "WIN DKK " + this.Indsats * 2 + "  & FREE SPINS";
+          winamount += this.Indsats * 2;
+          document.getElementById("WinAnnouncement")!.innerHTML = "FREE SPINS & ";
             break;
 
           case 1: 
           this.Login.balance += this.Indsats * 20;
-          document.getElementById("WinAnnouncement")!.innerHTML = "WIN DKK " + this.Indsats * 20;
+          winamount += this.Indsats * 20;
             break;
 
           case 2: 
           this.Login.balance += this.Indsats * 20;
-          document.getElementById("WinAnnouncement")!.innerHTML = "WIN DKK " + this.Indsats * 20;
+          winamount += this.Indsats * 20;
             break;
 
           case 3: 
           this.Login.balance += this.Indsats * 20;
-          document.getElementById("WinAnnouncement")!.innerHTML = "WIN DKK " + this.Indsats * 20;
+          winamount += this.Indsats * 20;
             break;
 
-          case 4: this.Login.balance += this.Indsats * 20;
+          case 4: 
+          this.Login.balance += this.Indsats * 20;
+          winamount += this.Indsats * 20;
             break;
 
-          case 5: this.Login.balance += this.Indsats * 20;
+          case 5: 
+          this.Login.balance += this.Indsats * 20;
+          winamount += this.Indsats * 20;
             break;
+
         }
+        
         //this.gameService.SaveWin()
       };
 
@@ -316,7 +326,10 @@ export class FrontpageComponent implements OnInit {
         //testern?.append(test);
       });
     });
-
+    if(winamount > 1){
+      document.getElementById("WinAnnouncement")!.innerHTML += winamount + " WIN DKK";
+    }
+    
 
     
   }

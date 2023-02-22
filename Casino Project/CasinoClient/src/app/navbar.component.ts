@@ -11,13 +11,19 @@ import { Router, RouterModule } from '@angular/router';
       <div class="container-fluid">
         <a class="navbar-brand">ABCCINO</a>
         <div class="nav-links">
-          <ul>
+          <ul class="navbuttons">
             <li class="nav-item">
               <a class="nav-link" href="">Home</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="">Contact</a>
+            </li>
           </ul>
           <ul class="navlogin">
-            <a class="nav-link">test</a>
+            <a class="nav-link">Login</a>
           </ul>
         </div>
       </div>
@@ -30,18 +36,26 @@ import { Router, RouterModule } from '@angular/router';
     list-style-type: none;
   }
   .navlogin{
+    
+  }
+  .navbuttons{
     margin-right:auto!important;
+    display:inline-flex;
   }
   .navbar{
     position:fixed;
     z-index:1;
     width:100%;
     height:50px;
+    display:flex;
+    left:0;
+    right:0;
   }
   .nav-links{
     display:flex;
     flex-basis:auto;
     flex-grow: 1;
+    align-items:center;
   }
   .container-fluid{
     height:100%;
@@ -56,6 +70,10 @@ import { Router, RouterModule } from '@angular/router';
   }
   a{
     text-decoration: none;
+    display:block;
+    margin-right:1rem;
+    padding-top:0.3rem;
+    padding-left:0.3rem;
   }
 
   @media (max-width: 911px){
