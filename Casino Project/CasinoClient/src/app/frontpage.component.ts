@@ -28,7 +28,7 @@ import { LoginService } from './_services/login.service';
       <td id="celle9"></td>
       </div>
         <div class="slotbar">
-          <div class="displayinfo">
+          <div class="displayinfo"> 
             <div>Balance: {{Login.balance}} DKK  Indsats: {{Indsats}} DKK</div>
           </div>
           <div class="win" id="WinAnnouncement">Test</div>
@@ -63,7 +63,7 @@ import { LoginService } from './_services/login.service';
     width:200px;
     font-size:25px;
   }
-  /* Spin button */
+  /* Spin button START*/
   .SpinButton{
     display:flex;
     justify-content:center;
@@ -107,7 +107,8 @@ import { LoginService } from './_services/login.service';
     position: relative;
     top: 12%;
   }
-  /* SVG Animation*/
+  /* Spin button END*/
+  /* SVG Animation START */
   path.one{
     transition: 0.4s;
     transform: translateX(-60%);
@@ -138,8 +139,22 @@ import { LoginService } from './_services/login.service';
         fill: white;
     }
 }
-/* SVG Animation*/
+/* SVG Animation END*/
 
+/* Drop animation START*/ 
+td:hover img{
+  animation: fall .1s linear forwards;
+}
+
+@keyframes drop{
+  0%{
+    transform: translateY(0);
+  }
+  100%{
+    transform: translateY(20em);
+  }
+}
+/* Drop animation END*/ 
   td{
     border:solid;
     width:100%;
@@ -212,6 +227,8 @@ export class FrontpageComponent implements OnInit {
   }
   
   Spin():void{
+
+    // Overflow hidden på celler, fix at de kan ses igennem de andre 23-02-2023
 
     if(this.Login.balance < this.Indsats){
       alert("Not enough balance");
@@ -327,7 +344,7 @@ export class FrontpageComponent implements OnInit {
       });
     });
     if(winamount > 1){
-      document.getElementById("WinAnnouncement")!.innerHTML += winamount + " WIN DKK";
+      document.getElementById("WinAnnouncement")!.innerHTML += winamount + " DKK WIN";
     }
     
 
