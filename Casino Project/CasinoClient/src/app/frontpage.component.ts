@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Game } from './_models/Game';
 import { CasinoService } from './_services/game.service';
 import { SplitInterpolation } from '@angular/compiler';
-import { concat, ConnectableObservable, count } from 'rxjs';
+import { concat, ConnectableObservable, count, delay } from 'rxjs';
 import { Login } from './_models/Login';
 import { LoginService } from './_services/login.service';
 
@@ -175,8 +175,9 @@ td:hover img{
     height:150px;
   }
 
-  #imgid{
-    min-height:100%;
+  .slotimg{
+    height:100%;
+    width:100%;
   }
 
   .SlotMaskine{
@@ -185,6 +186,7 @@ td:hover img{
     margin-left: 10%;
     margin-right:10%;
     justify-content: center;
+    overflow:hidden;
   }
   .innerwrapper{
     display:inline-block;
@@ -248,13 +250,13 @@ export class FrontpageComponent implements OnInit {
     counter = 0;
     
     var winamount: number = 0;
-
+    var savestyles: Element;
 
     //imageID?.parentNode?.removeChild(imageID);
 
     for( var test123213: number = 0;test123213 < 9; test123213++){
       //document.getElementById("celle" + test123213)!.removeChild(imageID);
-      document.getElementById("imgid")?.remove();
+      document.getElementById("imgid" + test123213)?.remove();
     }
 
     // Create et element baseret på hvilket tal der ligger i vores board. Først når tallet er gået igennem en if statement laver vi elementet
@@ -306,12 +308,18 @@ export class FrontpageComponent implements OnInit {
         //console.log(x);
 
         var test = document.createElement("img");
-        test.id = "imgid"
+        test.id = "imgid" + counter;
+        test.classList.add("slotimg");
         test.style.height = '100%';
         test.style.width = '100%';
         test.height = 170;
         test.width = 230;
+        test.style.top = '-600px';
+        test.style.position = "relative";
+        test.style.transition = "top 0.85s cubic-bezier(0.25, 0.09, 0.68, 0.03) 0s"
         
+        var savestyles = test.getAttribute("style");
+
         switch(x){
           case 0: 
             test.src = "https://www.clipartmax.com/png/middle/98-984354_vector-clip-art-slot-machine.png";
@@ -339,10 +347,16 @@ export class FrontpageComponent implements OnInit {
         }
         
         counter++;
-        var testern = document.getElementById("celle" + counter)?.appendChild(test);
-        //testern?.append(test);
+        document.getElementById("celle" + counter)?.appendChild(test);
+        
       });
+      
     });
+
+
+    this.Dropeffekt();
+
+
     if(winamount > 1){
       document.getElementById("WinAnnouncement")!.innerHTML += winamount + " DKK WIN";
     }
@@ -350,6 +364,17 @@ export class FrontpageComponent implements OnInit {
 
     
   }
+
+  Dropeffekt(): void{
+
+    for (let i = 0; i < 9; i++) {
+      var imgelem = document.getElementById("imgid" + i);
+      imgelem!.style.top = "0px";
+    }
+
+  }
+
+
 
   WinUdregning(): void{
 
