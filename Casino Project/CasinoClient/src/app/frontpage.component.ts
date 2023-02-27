@@ -15,17 +15,17 @@ import { LoginService } from './_services/login.service';
   <div class="topwrapper">
     <div class="innerwrapper">
       <div class="SlotMaskine">
-      <td id="celle1"></td>
-      <td id="celle2"></td>
       <td id="celle3"></td>
-
-      <td id="celle4"></td>
-      <td id="celle5"></td>
       <td id="celle6"></td>
-
-      <td id="celle7"></td>
-      <td id="celle8"></td>
       <td id="celle9"></td>
+
+      <td id="celle2"></td>
+      <td id="celle5"></td>
+      <td id="celle8"></td>
+
+      <td id="celle1"></td>
+      <td id="celle4"></td>
+      <td id="celle7"></td>
       </div>
         <div class="slotbar">
           <div class="displayinfo"> 
@@ -230,8 +230,6 @@ export class FrontpageComponent implements OnInit {
   
   Spin():void{
 
-    // Overflow hidden på celler, fix at de kan ses igennem de andre 23-02-2023
-
     if(this.Login.balance < this.Indsats){
       alert("Not enough balance");
       return;
@@ -261,7 +259,6 @@ export class FrontpageComponent implements OnInit {
 
     // Create et element baseret på hvilket tal der ligger i vores board. Først når tallet er gået igennem en if statement laver vi elementet
     this.board.forEach(element => {
-
 
       if(element[0] === element[1] && element[1] === element[2]){
         switch(element[0]){
@@ -297,14 +294,8 @@ export class FrontpageComponent implements OnInit {
             break;
 
         }
-        
-        //this.gameService.SaveWin()
       };
-
-      console.log(element);
-      element.forEach(x => {
-
-        
+    element.forEach(x => {
         //console.log(x);
 
         var test = document.createElement("img");
@@ -314,7 +305,6 @@ export class FrontpageComponent implements OnInit {
         test.style.width = '100%';
         test.height = 170;
         test.width = 230;
-        test.style.top = '-600px';
         test.style.position = "relative";
         test.style.transition = "top 0.85s cubic-bezier(0.25, 0.09, 0.68, 0.03) 0s"
         
@@ -344,40 +334,45 @@ export class FrontpageComponent implements OnInit {
             case 5:
               test.src = "https://www.clipartmax.com/png/middle/86-865969_free-icons-png-lemon-slot-machine-png.png"
               break;
-        }
+          }
         
         counter++;
         document.getElementById("celle" + counter)?.appendChild(test);
         
-      });
+    });
       
     });
 
 
     this.Dropeffekt();
 
-
     if(winamount > 1){
       document.getElementById("WinAnnouncement")!.innerHTML += winamount + " DKK WIN";
     }
-    
 
+    this.WinUdregning();
     
   }
 
   Dropeffekt(): void{
-
+    var delay = 100;
+    
     for (let i = 0; i < 9; i++) {
+      
       var imgelem = document.getElementById("imgid" + i);
-      imgelem!.style.top = "0px";
+      imgelem!.style.top = '-2000px';
+      delay += 300;
+      // SetTimeout er en async function der kører efter top stylen er sat, med delay får vi den celle drop animation.
+      setTimeout(function() {
+        var imgelem = document.getElementById("imgid" + i);
+          imgelem!.style.top = "0px";
+      }, delay);
     }
 
   }
 
-
-
   WinUdregning(): void{
-
+    
 
 
   }
