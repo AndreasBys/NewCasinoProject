@@ -15,17 +15,17 @@ import { LoginService } from './_services/login.service';
   <div class="topwrapper">
     <div class="innerwrapper">
       <div class="SlotMaskine">
-      <td id="celle3"></td>
-      <td id="celle6"></td>
       <td id="celle9"></td>
-
-      <td id="celle2"></td>
-      <td id="celle5"></td>
       <td id="celle8"></td>
-
-      <td id="celle1"></td>
-      <td id="celle4"></td>
       <td id="celle7"></td>
+
+      <td id="celle6"></td>
+      <td id="celle5"></td>
+      <td id="celle4"></td>
+
+      <td id="celle3"></td>
+      <td id="celle2"></td>
+      <td id="celle1"></td>
       </div>
         <div class="slotbar">
           <div class="displayinfo"> 
@@ -217,14 +217,14 @@ export class FrontpageComponent implements OnInit {
   Login: Login = {loginID: 0, email: '', balance: 100, Password: ''};
   board: Array<number>[] = [];
   Indsats: number = 10;
-
+  GameSpin: Game = {result:100 ,loginID:1};
 
   constructor(private gameService: CasinoService, private loginService: LoginService) { }
 
   ngOnInit(): void {
     this.gameService.getAll().subscribe(x => this.Games = x);
-    //this.loginService.getAll().subscribe(x => this.Login = x);
     this.loginService.getByID(1).subscribe(x => this.Login = x);
+    this.gameService.SaveWin(this.GameSpin);
     this.Spin();
   }
   
@@ -247,7 +247,7 @@ export class FrontpageComponent implements OnInit {
     var counter: number;
     counter = 0;
     
-    var winamount: number = 0;
+    var winamount: number = 0 - this.Indsats;
     var savestyles: Element;
 
     //imageID?.parentNode?.removeChild(imageID);
@@ -306,7 +306,7 @@ export class FrontpageComponent implements OnInit {
         test.height = 170;
         test.width = 230;
         test.style.position = "relative";
-        test.style.transition = "top 0.85s cubic-bezier(0.25, 0.09, 0.68, 0.03) 0s"
+        test.style.transition = "top 0.65s cubic-bezier(0.25, 0.09, 0.68, 0.03) 0s"
         
         var savestyles = test.getAttribute("style");
 
@@ -346,35 +346,60 @@ export class FrontpageComponent implements OnInit {
 
     this.Dropeffekt();
 
+    this.WinUdregning(winamount);
+
     if(winamount > 1){
+      winamount += 10;
       document.getElementById("WinAnnouncement")!.innerHTML += winamount + " DKK WIN";
     }
-
-    this.WinUdregning();
     
   }
 
   Dropeffekt(): void{
-    var delay = 100;
+    var delay = 0;
     
     for (let i = 0; i < 9; i++) {
       
       var imgelem = document.getElementById("imgid" + i);
       imgelem!.style.top = '-2000px';
-      delay += 300;
+      
+      delay += 150;
       // SetTimeout er en async function der kører efter top stylen er sat, med delay får vi den celle drop animation.
-      setTimeout(function() {
-        var imgelem = document.getElementById("imgid" + i);
-          imgelem!.style.top = "0px";
-      }, delay);
+      
+      if (i == 2 || i == 5 || i == 8) {
+        setTimeout(function() {
+          var imgelem = document.getElementById("imgid" + i );
+            imgelem!.style.top = "0px";
+        }, delay);
+      }
     }
-
+    for (let j = 0; j < 9; j++) {
+      delay += 100;
+      if (j == 1 || j == 4 || j == 7) {
+        setTimeout(function() {
+          var imgelem = document.getElementById("imgid" + j );
+            imgelem!.style.top = "0px";
+        }, delay);
+      }
+    }
+    for (let j = 0; j < 9; j++) {
+      delay += 75;
+      if (j == 0 || j == 3 || j == 6) {
+        setTimeout(function() {
+          var imgelem = document.getElementById("imgid" + j );
+            imgelem!.style.top = "0px";
+        }, delay);
+      }
+    }
   }
 
-  WinUdregning(): void{
+  WinUdregning(winamounnt: number): void{
+    //this.gameService.SaveWin();
+    this.GameSpin.loginID = this.Login.loginID;
+    this.GameSpin.result = winamounnt;
+    console.log(this.GameSpin);
+    this.gameService.SaveWin(this.GameSpin);
     
-
-
   }
 
 

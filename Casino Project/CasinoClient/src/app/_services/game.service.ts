@@ -17,7 +17,7 @@ export class CasinoService {
     return this.http.get<Game[]>(this.apiURL);
   }
   
-  SaveWin(login: Game): Observable<Game>{
-    return this.http.post<Game>(this.apiURL,login)
+  SaveWin(game: Game): Observable<Game>{
+    return this.http.post<Game>(this.apiURL,game)
   }
 }
