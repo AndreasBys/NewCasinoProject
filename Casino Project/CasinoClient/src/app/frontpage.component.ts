@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Game } from './_models/Game';
-import { CasinoService } from './_services/game.service';
+import { GameService } from './_services/game.service';
 import { SplitInterpolation } from '@angular/compiler';
 import { concat, ConnectableObservable, count, delay } from 'rxjs';
 import { Login } from './_models/Login';
@@ -214,12 +214,12 @@ td:hover img{
 })
 export class FrontpageComponent implements OnInit {
   Games: Game[] = [];
-  Login: Login = {loginID: 0, email: '', balance: 100, Password: ''};
+  Login: Login = {loginID: 0, email: '', balance: 100, password: ''};
   board: Array<number>[] = [];
   Indsats: number = 10;
   GameSpin: Game = {result:100 ,loginID:1};
 
-  constructor(private gameService: CasinoService, private loginService: LoginService) { }
+  constructor(private gameService: GameService, private loginService: LoginService) { }
 
   ngOnInit(): void {
     this.gameService.getAll().subscribe(x => this.Games = x);

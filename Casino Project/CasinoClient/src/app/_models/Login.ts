@@ -1,6 +1,6 @@
 export interface Login{
     loginID: number,
-    Password: string,
+    password: string,
     email: string,
     balance: number
 }
