@@ -36,7 +36,7 @@
         }
 
         [HttpPost]
-        public async Task<IActionResult> SendWin([FromBody]GameRequest gameRequest)
+        public async Task<IActionResult> SendWin([FromBody] GameRequest gameRequest)
         {
             try
             {

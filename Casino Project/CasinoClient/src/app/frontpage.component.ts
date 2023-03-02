@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Game } from './_models/Game';
-import { GameService } from './_services/game.service';
+import { CasinoService } from './_services/game.service';
 import { SplitInterpolation } from '@angular/compiler';
 import { concat, ConnectableObservable, count, delay } from 'rxjs';
 import { Login } from './_models/Login';
@@ -219,7 +219,7 @@ export class FrontpageComponent implements OnInit {
   Indsats: number = 10;
   GameSpin: Game = {result:100 ,loginID:1};
 
-  constructor(private gameService: GameService, private loginService: LoginService) { }
+  constructor(private gameService: CasinoService, private loginService: LoginService) { }
 
   ngOnInit(): void {
     this.gameService.getAll().subscribe(x => this.Games = x);
@@ -397,8 +397,9 @@ export class FrontpageComponent implements OnInit {
     //this.gameService.SaveWin();
     this.GameSpin.loginID = this.Login.loginID;
     this.GameSpin.result = winamounnt;
+    console.log(this.Games);
     console.log(this.GameSpin);
-    this.gameService.SaveWin(this.GameSpin);
+    this.gameService.SaveWin(this.GameSpin).subscribe();;
     
   }
 
