@@ -48,9 +48,7 @@ namespace CasinoWebAPI.Services
             if(game != null)
             {
                 return game.Select(game => GameToGameResponse(game)).ToList();
-            
             }
-
             return null;
         }
 
@@ -62,7 +60,6 @@ namespace CasinoWebAPI.Services
             {
                 throw new ArgumentNullException();
             }
-
 
             return GameToGameResponse(game);
         }

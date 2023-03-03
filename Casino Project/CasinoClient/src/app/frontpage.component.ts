@@ -224,7 +224,6 @@ export class FrontpageComponent implements OnInit {
   ngOnInit(): void {
     this.gameService.getAll().subscribe(x => this.Games = x);
     this.loginService.getByID(1).subscribe(x => this.Login = x);
-    this.gameService.SaveWin(this.GameSpin);
     this.Spin();
   }
   
@@ -241,23 +240,17 @@ export class FrontpageComponent implements OnInit {
     this.board.push([Math.floor(Math.random() * 6),Math.floor(Math.random() * 6),Math.floor(Math.random() * 6)]);
     this.board.push([Math.floor(Math.random() * 6),Math.floor(Math.random() * 6),Math.floor(Math.random() * 6)]); // Assign type baseret på hvilket nummer det er?? Typen kan være et billede
 
-    
-    //console.log(document.getElementById("celle1")?.appendChild(test));
-
     var counter: number;
     counter = 0;
     
     var winamount: number = 0 - this.Indsats;
     var savestyles: Element;
 
-    //imageID?.parentNode?.removeChild(imageID);
 
     for( var test123213: number = 0;test123213 < 9; test123213++){
-      //document.getElementById("celle" + test123213)!.removeChild(imageID);
       document.getElementById("imgid" + test123213)?.remove();
     }
 
-    // Create et element baseret på hvilket tal der ligger i vores board. Først når tallet er gået igennem en if statement laver vi elementet
     this.board.forEach(element => {
 
       if(element[0] === element[1] && element[1] === element[2]){
@@ -295,6 +288,8 @@ export class FrontpageComponent implements OnInit {
 
         }
       };
+      
+    // Create et element baseret på hvilket tal der ligger i vores board. Først når tallet er gået igennem en if statement laver vi elementet
     element.forEach(x => {
         //console.log(x);
 
@@ -394,11 +389,8 @@ export class FrontpageComponent implements OnInit {
   }
 
   WinUdregning(winamounnt: number): void{
-    //this.gameService.SaveWin();
     this.GameSpin.loginID = this.Login.loginID;
     this.GameSpin.result = winamounnt;
-    console.log(this.Games);
-    console.log(this.GameSpin);
     this.gameService.SaveWin(this.GameSpin).subscribe();;
     
   }

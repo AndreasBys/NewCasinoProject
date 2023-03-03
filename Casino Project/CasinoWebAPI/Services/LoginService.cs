@@ -29,8 +29,6 @@
                 Balance = login.Balance,
                 Email = login.Email,
                 Password = login.Password,
-
-
             };
         }
         public async Task<List<LoginResponse>> GetAllLoginAsync()
@@ -40,9 +38,7 @@
             if (login != null)
             {
                 return login.Select(login => LoginToLoginReponse(login)).ToList();
-
             }
-
 
             return null;
         }
@@ -58,7 +54,5 @@
             }
             return null;
         }
-
-
     }
 }
