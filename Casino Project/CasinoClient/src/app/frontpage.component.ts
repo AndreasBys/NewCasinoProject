@@ -28,6 +28,7 @@ import { LoginService } from './_services/login.service';
       <td id="celle1"></td>
       </div>
         <div class="slotbar">
+          <div class="settings"></div>
           <div class="displayinfo"> 
             <div>Balance: {{Login.balance}} DKK  Indsats: {{Indsats}} DKK</div>
           </div>
@@ -46,12 +47,14 @@ import { LoginService } from './_services/login.service';
             </span>
             </a>
           </div>
+          <div class="IndsatsChange"></div>
       </div>
     </div>
   </div>
   `,
   styles: [`
   
+  /* SLOT BAR CSS START */
   .displayinfo{
     margin:auto;
     width:150px;
@@ -155,6 +158,24 @@ td:hover img{
   }
 }
 /* Drop animation END*/ 
+
+.slotbar{
+    border:solid 2px;
+    background: black;
+    opacity: 0.6;
+    color:white;
+    display:flex;
+    justify-content:center;
+    height:150px;
+  }
+
+  .settings{
+    margin: auto;
+  }
+  .IndsatsChange{
+    margin: auto;
+  }
+/* SLOT BAR CSS END */
   td{
     border:solid;
     width:100%;
@@ -165,15 +186,7 @@ td:hover img{
     min-height:200px;
   }
 
-  .slotbar{
-    border:solid 2px;
-    background: black;
-    opacity: 0.6;
-    color:white;
-    display:flex;
-    justify-content:center;
-    height:150px;
-  }
+  
 
   .slotimg{
     height:100%;
