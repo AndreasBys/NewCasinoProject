@@ -33,6 +33,7 @@ namespace CasinoWebAPI.Repositories
         {
             // Tilføjer resultatet til vores context
             _context.Game.Add(games);
+            // Finder det login der passer til vores games.loginID property, og returnere login objektet hvor det passer
             var login = await _context.Login.FirstOrDefaultAsync(x => games.LoginID == x.LoginID);
             login.Balance += games.Result;
             // Gemmer contexten til databasen

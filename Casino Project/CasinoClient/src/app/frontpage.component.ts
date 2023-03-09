@@ -28,7 +28,9 @@ import { LoginService } from './_services/login.service';
       <td id="celle1"></td>
       </div>
         <div class="slotbar">
-          <div class="settings"></div>
+          <div class="settings">
+            <button (click)="settings()" class="settingsIcon"><img src="assets/settings-3110.png" class="settingsIcon"></button>
+          </div>
           <div class="displayinfo"> 
             <div>Balance: {{Login.balance}} DKK  Indsats: {{Indsats}} DKK</div>
           </div>
@@ -47,7 +49,10 @@ import { LoginService } from './_services/login.service';
             </span>
             </a>
           </div>
-          <div class="IndsatsChange"></div>
+          <div class="IndsatsChange">
+            <button (click)="indsatsIncrease()">Increase</button>
+            <button (click)="indsatsDecrease()">Decrease</button>
+          </div>
       </div>
     </div>
   </div>
@@ -65,6 +70,11 @@ import { LoginService } from './_services/login.service';
     text-align: center;
     width:200px;
     font-size:25px;
+  }
+  .settingsIcon{
+    background-size: cover;
+    padding: 0;
+    margin: 0;
   }
   /* Spin button START*/
   .SpinButton{
@@ -174,6 +184,7 @@ td:hover img{
   }
   .IndsatsChange{
     margin: auto;
+    display: grid;
   }
 /* SLOT BAR CSS END */
   td{
@@ -357,7 +368,7 @@ export class FrontpageComponent implements OnInit {
     this.WinUdregning(winamount);
 
     if(winamount > 1){
-      winamount += 10;
+      winamount += this.Indsats;
       document.getElementById("WinAnnouncement")!.innerHTML += winamount + " DKK WIN";
     }
     
@@ -408,6 +419,21 @@ export class FrontpageComponent implements OnInit {
     
   }
 
+  indsatsIncrease():void{
+    if (this.Indsats < 100) {
+    this.Indsats += 10 
+    }
+  }
+
+  indsatsDecrease():void{
+    if (this.Indsats > 10) {
+      this.Indsats += -10
+    }
+  }
+
+  settings():void{
+
+  }
 
 
 }
