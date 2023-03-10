@@ -50,8 +50,8 @@ import { LoginService } from './_services/login.service';
             </a>
           </div>
           <div class="IndsatsChange">
-            <button (click)="indsatsIncrease()">Increase</button>
-            <button (click)="indsatsDecrease()">Decrease</button>
+            <button (click)="indsatsIncrease()" class="indsats-1">+</button>
+            <button (click)="indsatsDecrease()" class="indsats-1">-</button>
           </div>
       </div>
     </div>
@@ -184,7 +184,12 @@ td:hover img{
   }
   .IndsatsChange{
     margin: auto;
-    display: grid;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .indsats-1{
+    border-radius:70%;
   }
 /* SLOT BAR CSS END */
   td{
