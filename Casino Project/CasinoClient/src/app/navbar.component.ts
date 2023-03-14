@@ -23,7 +23,7 @@ import { Router, RouterModule } from '@angular/router';
             </li>
           </ul>
           <ul class="navlogin">
-            <a class="nav-link">Login</a>
+            <a class="nav-link" href="/login">Login</a>
           </ul>
         </div>
       </div>
