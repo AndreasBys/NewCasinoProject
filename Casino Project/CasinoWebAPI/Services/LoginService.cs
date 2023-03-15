@@ -5,7 +5,7 @@
         Task<List<LoginResponse>> GetAllLoginAsync();
         Task<LoginResponse> GetLoginByID(int ID);
 
-
+        Task<LoginResponse> AuthLoginRequest(Login login);
     }
 
 
@@ -53,6 +53,24 @@
                 return LoginToLoginReponse(login);
             }
             return null;
+        }
+
+        public async Task<LoginResponse> AuthLoginRequest(Login login)
+        {
+            var logins = await _loginRepository.GetLoginByEmail(login.Email);
+            if (logins == null)
+            {
+                return null;
+            }
+
+            if (login.Password == logins.Password)
+            {
+
+
+            }
+
+
+
         }
     }
 }

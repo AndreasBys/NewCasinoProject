@@ -10,7 +10,7 @@
 
         public double Balance { get; set; }
 
-
+        public string AuthToken { get; set; }
 
 
 

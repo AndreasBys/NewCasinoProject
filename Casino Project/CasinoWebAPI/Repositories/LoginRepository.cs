@@ -5,6 +5,7 @@ namespace CasinoWebAPI.Repositories
 
     public interface ILoginRepository
     {
+        Task<Login> GetLoginByEmail(string email);
         Task<List<Login>> GetAllLoginAsync();
         Task<Login> GetLoginByID(int id);
  
@@ -29,6 +30,11 @@ namespace CasinoWebAPI.Repositories
         {
 
             return await _context.Login.FirstOrDefaultAsync(x => id == x.LoginID);
+        }
+
+        public async Task<Login?> GetLoginByEmail(string email)
+        {
+            return await _context.Login.FirstOrDefaultAsync(x => email == x.Email);
         }
     }
 }
