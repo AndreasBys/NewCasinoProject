@@ -65,7 +65,10 @@
 
             if (login.Password == logins.Password)
             {
-
+                LoginResponse responsobj = new LoginResponse()
+                {
+                    AuthToken = _jw
+                }
 
             }
 
