@@ -68,7 +68,7 @@
                 LoginResponse responsobj = new LoginResponse()
                 {
                     AuthToken = _jw
-                }
+                };
 
             }
 

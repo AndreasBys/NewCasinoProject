@@ -11,3 +11,4 @@ global using CasinoWebAPI.Repositories;
 global using CasinoWebAPI.Controllers;
 //global using CasinoWebAPI.Helpers;
 //global using CasinoWebAPI.Authorization;
+global using System.IdentityModel.Tokens.Jwt;
