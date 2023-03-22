@@ -15,6 +15,7 @@
     {
 
         private readonly ILoginRepository _loginRepository;
+        private readonly 
 
         public LoginService(ILoginRepository loginRepository)
         {
@@ -67,7 +68,9 @@
             {
                 LoginResponse responsobj = new LoginResponse()
                 {
-                    //AuthToken = _jw
+                    LoginID = login.LoginID,
+                    Email = logins.Email,
+                    AuthToken = 
                 };
 
             }

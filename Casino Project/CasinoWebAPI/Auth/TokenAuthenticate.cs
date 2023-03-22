@@ -6,8 +6,15 @@ namespace CasinoWebAPI.Auth
 {
     public class TokenAuthenticate
     {
+        public interface ITokenAuthenticate
+        {
+            Task<string> GenerateToken();
+        }
 
+        public class Tokenclass : ITokenAuthenticate
+        {
 
+        }
 
         public string GenerateToken(Login login)
         {
@@ -42,7 +49,26 @@ namespace CasinoWebAPI.Auth
 
             JwtSecurityTokenHandler handler = new JwtSecurityTokenHandler();
 
+            try
+            {
+                handler.ValidateToken(token, new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(tokennoegle),
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    ClockSkew = TimeSpan.Zero,
+                }, out SecurityToken validatedToken) ;
 
+                JwtSecurityToken jwttoken = (JwtSecurityToken)validatedToken;
+                int id = int.Parse(jwttoken.Claims.First(x => x.Type == "id").Value);
+
+                return id;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
 
 
 
