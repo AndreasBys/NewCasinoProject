@@ -1,11 +1,14 @@
-﻿namespace CasinoWebAPI.Services
+﻿using CasinoWebAPI.Auth;
+using static CasinoWebAPI.Auth.TokenAuthenticate;
+
+namespace CasinoWebAPI.Services
 {
     public interface ILoginService
     {
         Task<List<LoginResponse>> GetAllLoginAsync();
         Task<LoginResponse> GetLoginByID(int ID);
 
-        Task<LoginResponse> AuthLoginRequest(Login login);
+        Task<LoginResponse> AuthLoginRequest(LoginRequest login);
     }
 
 
@@ -15,7 +18,7 @@
     {
 
         private readonly ILoginRepository _loginRepository;
-        private readonly 
+        private readonly ITokenAuthenticate _tokenauth;
 
         public LoginService(ILoginRepository loginRepository)
         {
@@ -56,23 +59,22 @@
             return null;
         }
 
-        public async Task<LoginResponse> AuthLoginRequest(Login login)
+        public async Task<LoginResponse> AuthLoginRequest(LoginRequest login)
         {
-            var logins = await _loginRepository.GetLoginByEmail(login.Email);
-            if (logins == null)
+            var user = await _loginRepository.GetLoginByEmail(login.Email);
+            if (user == null)
             {
                 return null;
             }
 
-            if (login.Password == logins.Password)
+            if (login.Password == user.Password)
             {
-                LoginResponse responsobj = new LoginResponse()
+                LoginResponse responsobj = new()
                 {
-                    LoginID = login.LoginID,
-                    Email = logins.Email,
-                    AuthToken = 
+                    Email = user.Email,
+                    AuthToken = _tokenauth.GenerateToken(user)
                 };
-
+                return responsobj;
             }
             return null;
 

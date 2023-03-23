@@ -56,5 +56,26 @@ namespace CasinoWebAPI.Controllers
                 return Problem(ex.Message);
             }
         }
+
+        [HttpPost]
+        [Route("LoginRequest")]
+        public async Task<IActionResult> AuthLoginRequest([FromBody] LoginRequest login)
+        {
+            try
+            {
+                var logins = await _loginService.AuthLoginRequest(login);
+
+                if (logins == null)
+                {
+                    return NotFound();
+                }
+                return Ok(logins);
+            }
+            catch (Exception ex)
+            {
+                return Problem(ex.Message);
+            }
+        }
+
     }
 }
