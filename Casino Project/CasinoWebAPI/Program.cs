@@ -14,6 +14,7 @@ builder.Services.AddScoped<IGameRepository,GameRepository>();
 builder.Services.AddScoped<ILoginService, LoginService>();
 builder.Services.AddScoped<ILoginRepository, LoginRepository>();
 
+builder.Services.AddScoped<ITokenAuthenticate, TokenAuthenticate>();
 
 
 

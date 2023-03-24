@@ -1,5 +1,4 @@
 ﻿using CasinoWebAPI.Auth;
-using static CasinoWebAPI.Auth.TokenAuthenticate;
 
 namespace CasinoWebAPI.Services
 {
@@ -20,9 +19,10 @@ namespace CasinoWebAPI.Services
         private readonly ILoginRepository _loginRepository;
         private readonly ITokenAuthenticate _tokenauth;
 
-        public LoginService(ILoginRepository loginRepository)
+        public LoginService(ILoginRepository loginRepository, ITokenAuthenticate tokenauth)
         {
             _loginRepository = loginRepository;
+            _tokenauth = tokenauth;
         }
 
         private LoginResponse LoginToLoginReponse(Login login)
@@ -65,13 +65,15 @@ namespace CasinoWebAPI.Services
             if (user == null)
             {
                 return null;
-            }
+            } 
 
             if (login.Password == user.Password)
             {
                 LoginResponse responsobj = new()
                 {
+                    LoginID = user.LoginID,
                     Email = user.Email,
+                    Balance = user.Balance,
                     AuthToken = _tokenauth.GenerateToken(user)
                 };
                 return responsobj;
