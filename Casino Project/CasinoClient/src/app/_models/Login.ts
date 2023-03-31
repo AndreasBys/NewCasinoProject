@@ -3,5 +3,5 @@ export interface Login{
     password: string,
     email: string,
     balance: number,
-    authtoken: string
+    authtoken?: string
 }

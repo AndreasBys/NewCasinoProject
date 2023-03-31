@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { AuthService } from './_services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,7 @@ import { CommonModule } from '@angular/common';
             <input><br>
             <label>Password</label><br>
             <input><br>
-            <button>Login</button>
+            <button (click)="login()">Login</button>
           </div>
       </div>
   </div>
@@ -48,6 +49,19 @@ import { CommonModule } from '@angular/common';
 
   `]
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit{
 
+  constructor(private AuthServices: AuthService){}
+
+  ngOnInit(): void {
+    
+  }
+
+
+
+
+  login(email: string, password: string):void{
+
+    this.AuthServices.login(email,password).subscribe();
+  }
 }

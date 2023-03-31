@@ -21,6 +21,10 @@ export class AuthService {
 
    }
 
+   public get LoggedUserValue(): Login{
+    return this.UserSubject.value;
+   }
+  
 
   login(email: string, password: string){
     let authenticate = `${environment.ApiURL}Login/LoginRequest`;
